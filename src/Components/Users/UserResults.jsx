@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useContext } from "react"
 import Spinner from "../Layout/Spinner"
 import UserItem from "../UserItem"
+import GithubContext from "../Context/github/GithubContext"
 
 function UserResults() {
-  const [users, setUsers] = useState([])
-  const [loading, setLoading] = useState(true)
-  const fetchUsers = async () => {
-    const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users`)
-    // why do we have to do this?
-    const data = await response.json()
-    console.log("🚀 ~ file: UserResults.jsx:15 ~ fetchUsers ~ data:", data)
-    setUsers(data)
-    setLoading(false)
-  }
+
+  const {users, loading, fetchUsers} = useContext(GithubContext)
 
   // When page loads hit the github api for a list of users
   useEffect(
     () => () => {
       fetchUsers()
     },
-    [],
+    []
   )
 
   if (!loading) {

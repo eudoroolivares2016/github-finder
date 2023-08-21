@@ -8,31 +8,35 @@ import About from "./Components/Pages/About"
 import Home from "./Components/Pages/Home"
 import NotFound from "./Components/Pages/NotFound"
 
+import {GithubProvider} from "./Components/Context/github/GithubContext"
+
 function App() {
   return (
-    <Router>
-      <div className="flex flex-col justify-between h-screen">
-        <NavBar />
-      </div>
-      <main className="container mx-auto px-3 pb-12">
-        <Routes>
-          <Route path="/" element={<Home />}>
-            Home
-          </Route>
-          <Route path="/about" element={<About />}>
-            About
-          </Route>
-          <Route path="/notfound" element={<NotFound />}>
-            Not Found
-          </Route>
-          {/* Catch all if they got to page not found */}
-          <Route path="/*" element={<NotFound />}>
-            Not Found
-          </Route>
-        </Routes>
-      </main>
-      <Footer> </Footer>
-    </Router>
+    <GithubProvider>
+      <Router>
+        <div className="flex flex-col justify-between h-screen">
+          <NavBar />
+        <main className="container mx-auto px-3 pb-12">
+          <Routes>
+            <Route path="/" element={<Home />}>
+              Home
+            </Route>
+            <Route path="/about" element={<About />}>
+              About
+            </Route>
+            <Route path="/notfound" element={<NotFound />}>
+              Not Found
+            </Route>
+            {/* Catch all if they got to page not found */}
+            <Route path="/*" element={<NotFound />}>
+              Not Found
+            </Route>
+          </Routes>
+        </main>
+        </div>
+        <Footer> </Footer>
+      </Router>
+    </GithubProvider>
   )
 }
 
